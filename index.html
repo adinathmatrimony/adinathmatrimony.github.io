@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adinath Matrimony — Share a Biodata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Gujarati:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --maroon:#7A1F3D; --maroon-soft:#9C3355; --gold:#C08A2E; --gold-soft:#E3C179;
+  --bg:#FBF6F1; --surface:#FFFFFF; --surface-2:#F5ECE4;
+  --text:#2A1A20; --muted:#6E5A60; --line:#E6D8CE;
+  --radius:14px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#16100F; --surface:#221917; --surface-2:#2C211F;
+    --text:#F3E9E2; --muted:#B49C95; --line:#3A2C29;
+    --maroon:#D9819C; --maroon-soft:#C96A88; --gold:#E3C179;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16100F; --surface:#221917; --surface-2:#2C211F;
+  --text:#F3E9E2; --muted:#B49C95; --line:#3A2C29;
+  --maroon:#D9819C; --maroon-soft:#C96A88; --gold:#E3C179;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,"Noto Sans Devanagari","Noto Sans Gujarati",system-ui,sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body[data-lang="hi"]{font-family:"Noto Sans Devanagari",Inter,sans-serif}
+body[data-lang="gu"]{font-family:"Noto Sans Gujarati",Inter,sans-serif}
+img{max-width:100%}
+h1,h2,h3{font-family:Fraunces,"Noto Sans Devanagari","Noto Sans Gujarati",serif;font-weight:600;line-height:1.25;margin:0}
+.wrap{width:100%;max-width:640px;margin:0 auto;padding:0 20px}
+
+/* ---------- language gate ---------- */
+#gate{position:absolute;inset:0;min-height:100%;z-index:50;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;padding:32px 20px}
+#gate .card{width:100%;max-width:420px;text-align:center}
+#gate .mark{width:72px;height:72px;margin:0 auto 22px;border-radius:50%;
+  background:var(--maroon);display:flex;align-items:center;justify-content:center;
+  color:#fff;font-family:Fraunces,serif;font-size:30px}
+.langbtn{display:flex;align-items:center;justify-content:space-between;width:100%;
+  margin-top:10px;padding:16px 18px;border:1px solid var(--line);background:var(--surface);
+  border-radius:var(--radius);color:var(--text);font-size:17px;cursor:pointer;
+  font-family:inherit;transition:border-color .15s,transform .1s}
+.langbtn:hover{border-color:var(--maroon)}
+.langbtn:active{transform:scale(.99)}
+.langbtn small{color:var(--muted);font-size:13px}
+
+/* ---------- hero ---------- */
+#app{display:none}
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:48px 20px 72px;position:relative;
+  background:radial-gradient(120% 80% at 50% 0%,var(--surface-2) 0%,var(--bg) 70%)}
+.logo-slot{width:min(60vw,230px);aspect-ratio:1;margin-bottom:28px;
+  display:flex;align-items:center;justify-content:center}
+.logo-slot img{width:100%;height:100%;object-fit:contain}
+.hero .eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:11px;
+  color:var(--gold);margin-bottom:12px}
+.hero h1{font-size:clamp(30px,8vw,46px);color:var(--maroon)}
+.hero p{color:var(--muted);margin:14px 0 30px;max-width:420px}
+.scrolldown{position:absolute;bottom:calc(26px + env(safe-area-inset-bottom,0px));
+  color:var(--muted);font-size:13px;display:flex;flex-direction:column;
+  align-items:center;gap:6px;text-decoration:none}
+.chev{width:16px;height:16px;border-right:2px solid var(--maroon);
+  border-bottom:2px solid var(--maroon);transform:rotate(45deg);
+  animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:rotate(45deg) translate(0,0)}50%{transform:rotate(45deg) translate(4px,4px)}}
+@media (prefers-reduced-motion:reduce){.chev{animation:none}}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:15px 26px;border-radius:999px;border:none;cursor:pointer;
+  font-family:inherit;font-size:16px;font-weight:500;transition:opacity .15s,transform .1s}
+.btn:active{transform:scale(.985)}
+.btn-primary{background:var(--maroon);color:#fff}
+:root[data-theme="dark"] .btn-primary,
+@media (prefers-color-scheme:dark){}
+.btn-ghost{background:transparent;color:var(--maroon);border:1px solid var(--line)}
+.btn-wa{background:#1FA855;color:#fff;width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn-row{display:flex;gap:10px;margin-top:26px}
+.btn-row .btn{flex:1}
+
+/* ---------- form ---------- */
+section.pane{padding:56px 0 72px}
+.steps{display:flex;gap:6px;margin-bottom:26px}
+.steps i{flex:1;height:3px;border-radius:2px;background:var(--line);display:block}
+.steps i.on{background:var(--maroon)}
+.kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+h2{font-size:clamp(23px,5.5vw,30px)}
+.sub{color:var(--muted);margin:8px 0 26px}
+label{display:block;font-size:14px;font-weight:500;margin:18px 0 7px}
+label span{color:var(--maroon)}
+input,select,textarea{width:100%;padding:14px 15px;border:1px solid var(--line);
+  border-radius:var(--radius);background:var(--surface);color:var(--text);
+  font-family:inherit;font-size:16px}
+input:focus,select,textarea:focus{outline:2px solid var(--maroon-soft);outline-offset:1px}
+textarea{min-height:120px;resize:vertical}
+.hint{font-size:13px;color:var(--muted);margin-top:6px}
+.err{font-size:13px;color:#C0392B;margin-top:6px;display:none}
+.err.show{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{padding:8px 14px;border:1px dashed var(--line);border-radius:999px;
+  background:transparent;color:var(--muted);font-size:13px;cursor:pointer;font-family:inherit}
+.chip:hover{border-color:var(--maroon);color:var(--maroon)}
+.drop{border:1.5px dashed var(--line);border-radius:var(--radius);padding:28px 18px;
+  text-align:center;cursor:pointer;background:var(--surface)}
+.drop:hover{border-color:var(--maroon)}
+.drop .big{font-size:28px;color:var(--maroon)}
+.drop b{display:block;margin-top:8px;font-weight:500}
+.filebar{display:none;align-items:center;gap:12px;margin-top:12px;padding:12px 14px;
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2)}
+.filebar.show{display:flex}
+.filebar .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+.filebar button{background:none;border:none;color:var(--maroon);cursor:pointer;font-family:inherit}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+@media (max-width:480px){.two{grid-template-columns:1fr}}
+
+/* ---------- review ---------- */
+.rev{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+  overflow:hidden;margin-bottom:18px}
+.rev .row{display:flex;gap:14px;padding:13px 16px;border-bottom:1px solid var(--line);font-size:15px}
+.rev .row:last-child{border-bottom:none}
+.rev .row .k{color:var(--muted);flex:0 0 40%;font-size:14px}
+.rev .row .v{flex:1;word-break:break-word}
+.viewer{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  background:var(--surface-2);margin-bottom:18px}
+.viewer iframe,.viewer img{display:block;width:100%;height:420px;border:none;object-fit:contain;background:var(--surface-2)}
+
+/* ---------- plans ---------- */
+.plan{display:block;border:1.5px solid var(--line);border-radius:var(--radius);
+  background:var(--surface);padding:18px;margin-bottom:12px;cursor:pointer;position:relative}
+.plan.sel{border-color:var(--maroon);background:var(--surface-2)}
+.plan .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.plan .nm{font-weight:500;font-size:17px}
+.plan .pr{font-family:Fraunces,serif;font-size:21px;color:var(--maroon);white-space:nowrap}
+.plan .ds{color:var(--muted);font-size:14px;margin-top:5px}
+.tag{position:absolute;top:-10px;right:14px;background:var(--gold);color:#3B2703;
+  font-size:11px;padding:3px 10px;border-radius:999px;letter-spacing:.06em}
+.plan input{position:absolute;opacity:0;pointer-events:none}
+.paybox{border:1px solid var(--line);border-radius:var(--radius);padding:16px;
+  background:var(--surface-2);margin-top:6px;display:none}
+.paybox.show{display:block}
+.upi{font-family:ui-monospace,monospace;font-size:15px;background:var(--surface);
+  border:1px solid var(--line);padding:10px 12px;border-radius:10px;margin-top:8px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px}
+.consent{display:flex;gap:11px;align-items:flex-start;margin:22px 0 0;font-size:14px;color:var(--muted)}
+.consent input{width:19px;height:19px;flex:0 0 auto;margin-top:2px;accent-color:var(--maroon)}
+
+/* ---------- done ---------- */
+.done{text-align:center;padding:80px 0 90px}
+.done .tick{width:66px;height:66px;border-radius:50%;background:var(--maroon);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 22px}
+footer{text-align:center;padding:30px 20px calc(36px + env(safe-area-inset-bottom,0px));
+  color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+.langswitch{position:sticky;top:0;z-index:20;background:var(--bg);
+  border-bottom:1px solid var(--line);display:flex;justify-content:flex-end;
+  padding:8px 16px;padding-top:calc(8px + env(safe-area-inset-top,0px))}
+.langswitch select{width:auto;padding:6px 10px;font-size:13px;border-radius:999px}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="card">
+    <div class="mark">A</div>
+    <div style="font-family:Fraunces,serif;font-size:19px;color:var(--maroon);margin-bottom:18px">Adinath Matrimony</div>
+    <h1 style="font-size:23px">Choose your language</h1>
+    <p style="color:var(--muted);font-size:15px;margin:8px 0 22px">
+      अपनी भाषा चुनें · તમારી ભાષા પસંદ કરો
+    </p>
+    <button class="langbtn" data-set="en"><span>English</span><small>English</small></button>
+    <button class="langbtn" data-set="hi"><span>हिन्दी</span><small>Hindi</small></button>
+    <button class="langbtn" data-set="gu"><span>ગુજરાતી</span><small>Gujarati</small></button>
+  </div>
+</div>
+
+<div id="app">
+  <div class="langswitch">
+    <select id="langSel" aria-label="Language">
+      <option value="en">English</option><option value="hi">हिन्दी</option><option value="gu">ગુજરાતી</option>
+    </select>
+  </div>
+
+  <header class="hero">
+    <div class="logo-slot">
+      <img id="logo" src="logo.png" alt="Logo">
+    </div>
+    <div class="eyebrow" data-t="eyebrow"></div>
+    <h1 data-t="brand"></h1>
+    <p data-t="heroSub"></p>
+    <a class="btn btn-primary" href="#start" data-t="heroCta"></a>
+    <a class="scrolldown" href="#start"><span data-t="scroll"></span><i class="chev"></i></a>
+  </header>
+
+  <main id="start">
+    <!-- STEP 1 -->
+    <section class="pane" id="p1">
+      <div class="wrap">
+        <div class="steps"><i class="on"></i><i></i><i></i><i></i></div>
+        <div class="kicker" data-t="k1"></div>
+        <h2 data-t="t1"></h2>
+        <p class="sub" data-t="s1"></p>
+
+        <label data-t="fYourName"></label>
+        <input id="yourName" autocomplete="name">
+        <div class="err" id="e_yourName" data-t="reqErr"></div>
+
+        <label data-t="fWa"></label>
+        <input id="wa" type="tel" inputmode="numeric" placeholder="98XXXXXXXX">
+        <div class="hint" data-t="hWa"></div>
+        <div class="err" id="e_wa" data-t="waErr"></div>
+
+        <label data-t="fRelation"></label>
+        <select id="relation"></select>
+        <div class="err" id="e_relation" data-t="reqErr"></div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" data-go="p2" data-t="next"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="pane hidden" id="p2">
+      <div class="wrap">
+        <div class="steps"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <div class="kicker" data-t="k2"></div>
+        <h2 data-t="t2"></h2>
+        <p class="sub" data-t="s2"></p>
+
+        <label data-t="fPerson"></label>
+        <input id="person">
+        <div class="err" id="e_person" data-t="reqErr"></div>
+
+        <div class="two">
+          <div>
+            <label data-t="fGender"></label>
+            <select id="gender"></select>
+            <div class="err" id="e_gender" data-t="reqErr"></div>
+          </div>
+          <div>
+            <label data-t="fBirth"></label>
+            <input id="birth" type="number" inputmode="numeric" placeholder="1996" min="1940" max="2012">
+          </div>
+        </div>
+
+        <label data-t="fCity"></label>
+        <input id="city">
+
+        <label data-t="fFile"></label>
+        <div class="drop" id="drop">
+          <div class="big">⬆</div>
+          <b data-t="dropTitle"></b>
+          <div class="hint" data-t="dropHint"></div>
+        </div>
+        <input type="file" id="file" accept=".pdf,.jpg,.jpeg,.png" class="hidden">
+        <div class="filebar" id="filebar">
+          <span class="nm" id="fileName"></span>
+          <button type="button" id="fileClear" data-t="remove"></button>
+        </div>
+        <div class="err" id="e_file" data-t="fileErr"></div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" data-go="p1" data-t="back"></button>
+          <button class="btn btn-primary" data-go="p3" data-t="next"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="pane hidden" id="p3">
+      <div class="wrap">
+        <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+        <div class="kicker" data-t="k3"></div>
+        <h2 data-t="t3"></h2>
+        <p class="sub" data-t="s3"></p>
+
+        <label data-t="fReq"></label>
+        <textarea id="req" placeholder=""></textarea>
+        <div class="hint" data-t="hReq"></div>
+        <div class="chips" id="chips"></div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" data-go="p2" data-t="back"></button>
+          <button class="btn btn-primary" data-go="p4" data-t="review"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4 : REVIEW -->
+    <section class="pane hidden" id="p4">
+      <div class="wrap">
+        <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <div class="kicker" data-t="k4"></div>
+        <h2 data-t="t4"></h2>
+        <p class="sub" data-t="s4"></p>
+
+        <div class="rev" id="rev"></div>
+        <div class="viewer hidden" id="viewer"></div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" data-go="p2" data-t="edit"></button>
+          <button class="btn btn-primary" data-go="p5" data-t="looksGood"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5 : PLANS -->
+    <section class="pane hidden" id="p5">
+      <div class="wrap">
+        <div class="kicker" data-t="k5"></div>
+        <h2 data-t="t5"></h2>
+        <p class="sub" data-t="s5"></p>
+        <div id="plans"></div>
+
+        <div class="paybox" id="paybox">
+          <div style="font-size:14px" data-t="payNote"></div>
+          <div class="upi"><span id="upiId">yourname@okhdfcbank</span>
+            <button class="chip" id="copyUpi" data-t="copy"></button></div>
+        </div>
+
+        <label class="consent">
+          <input type="checkbox" id="consent">
+          <span data-t="consent"></span>
+        </label>
+        <div class="err" id="e_consent" data-t="consentErr"></div>
+
+        <div style="margin-top:22px">
+          <button class="btn btn-wa" id="send" data-t="sendWa"></button>
+        </div>
+        <div class="hint" style="text-align:center;margin-top:10px" data-t="waHint"></div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" data-go="p4" data-t="back"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DONE -->
+    <section class="pane hidden" id="p6">
+      <div class="wrap done">
+        <div class="tick">✓</div>
+        <h2 data-t="doneT"></h2>
+        <p class="sub" data-t="doneS"></p>
+        <div id="ref" style="font-family:ui-monospace,monospace;font-size:15px;color:var(--maroon)"></div>
+        <div style="margin-top:22px">
+          <a class="btn btn-wa" id="waLink" href="#" target="_blank" rel="noopener" data-t="openWa"></a>
+        </div>
+        <div class="hint" style="margin-top:14px" data-t="openWaHint"></div>
+        <button class="chip" id="copyMsg" style="margin-top:10px" data-t="copyMsg"></button>
+        <div class="btn-row" style="justify-content:center">
+          <button class="btn btn-ghost" id="again" data-t="again"></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div data-t="brand"></div>
+    <div style="margin-top:6px" data-t="footNote"></div>
+  </footer>
+</div>
+
+<script>
+/* ============ CONFIG — edit these three lines only ============ */
+var BRAND_WA   = "919106141806";                 // your WhatsApp number, country code, no +
+var UPI_ID     = "yourname@okhdfcbank";          // your UPI id
+var API_URL    = "";                             // Apps Script /exec URL (leave "" to skip upload)
+/* ============================================================== */
+
+var T = {
+ en:{
+  eyebrow:"Trusted · Confidential · Since 2026", brand:"Adinath Matrimony",
+  heroSub:"Share a biodata with us. We match it within our community, privately and with respect — no public listing, ever.",
+  heroCta:"Share a biodata", scroll:"Scroll down to begin",
+  k1:"Step 1 of 4", t1:"About you", s1:"So we know who to reply to.",
+  fYourName:"Your full name *", fWa:"Your WhatsApp number *", hWa:"10 digits, India (+91)",
+  fRelation:"Your relation to this person *",
+  rel:["Select","Self","Daughter","Son","Sister","Brother","Relative","Friend","Other"],
+  k2:"Step 2 of 4", t2:"Biodata details", s2:"Whose biodata are you sharing?",
+  fPerson:"Name of the person *", fGender:"Gender *", gen:["Select","Female","Male"],
+  fBirth:"Birth year", fCity:"City",
+  fFile:"Upload the biodata *", dropTitle:"Tap to choose a file",
+  dropHint:"PDF, JPG or PNG · up to 10 MB", remove:"Remove",
+  k3:"Step 3 of 4", t3:"What are you looking for?", s3:"Write freely — any language is fine.",
+  fReq:"Your requirements", hReq:"Example: salary above 5 lakh, never married, Ahmedabad or Baroda, vegetarian.",
+  chips:["Salary above ₹5 lakh","Never married","Same city","Vegetarian","Government job","Higher education"],
+  k4:"Step 4 of 4", t4:"Please check your details", s4:"Read once. If anything is wrong, go back and edit.",
+  k5:"Almost done", t5:"Choose a plan", s5:"Start free. Upgrade any time.",
+  plans:[{n:"1 month",p:"Free",d:"Full profile sharing for 30 days.",tag:"Start here"},
+         {n:"3 months",p:"₹100",d:"Priority matching and follow-up for 90 days."},
+         {n:"Lifetime",p:"₹1100",d:"One payment. We keep looking until it is settled."}],
+  payNote:"Pay using this UPI id, then send the message. Add the payment screenshot on WhatsApp.",
+  copy:"Copy",
+  consent:"The information above is true to my knowledge, and I allow it to be shared for matchmaking purposes.",
+  consentErr:"Please accept to continue.",
+  sendWa:"Send on WhatsApp", waHint:"WhatsApp will open with your summary ready. Attach the biodata file there too.",
+  next:"Continue", back:"Back", review:"Review", edit:"Edit", looksGood:"Looks correct",
+  reqErr:"This field is required.", waErr:"Enter a valid 10-digit number.",
+  fileErr:"Please upload the biodata file.",
+  doneT:"Thank you for trusting us", doneS:"We have received your details and will reply shortly on WhatsApp.",
+  again:"Submit another", footNote:"Your details are never shared publicly.",
+  openWa:"Open WhatsApp", openWaAlt:"Use WhatsApp Web", copyMsg:"Copy message", copied:"Copied",
+  openWaHint:"If WhatsApp did not open, tap the button above.",
+  mTitle:"New biodata submission", mFor:"Biodata of", mBy:"Sent by", mRel:"Relation",
+  mWa:"WhatsApp", mReq:"Requirement", mPlan:"Plan", mRef:"Ref"
+ },
+ hi:{
+  eyebrow:"विश्वसनीय · गोपनीय", brand:"आदिनाथ मैट्रिमोनी",
+  heroSub:"अपना बायोडाटा हमें भेजें। हम अपने समाज में आदर और गोपनीयता के साथ मिलान करते हैं — कहीं सार्वजनिक नहीं किया जाता।",
+  heroCta:"बायोडाटा भेजें", scroll:"शुरू करने के लिए नीचे जाएँ",
+  k1:"चरण 1 / 4", t1:"आपकी जानकारी", s1:"ताकि हम आपको उत्तर दे सकें।",
+  fYourName:"आपका पूरा नाम (Name) *", fWa:"आपका WhatsApp नंबर *", hWa:"10 अंक, भारत (+91)",
+  fRelation:"इस व्यक्ति से आपका संबंध *",
+  rel:["चुनें","स्वयं","बेटी","बेटा","बहन","भाई","रिश्तेदार","मित्र","अन्य"],
+  k2:"चरण 2 / 4", t2:"बायोडाटा की जानकारी", s2:"किसका बायोडाटा भेज रहे हैं?",
+  fPerson:"व्यक्ति का नाम (Name) *", fGender:"लिंग *", gen:["चुनें","स्त्री","पुरुष"],
+  fBirth:"जन्म वर्ष", fCity:"शहर",
+  fFile:"बायोडाटा अपलोड करें *", dropTitle:"फ़ाइल चुनने के लिए दबाएँ",
+  dropHint:"PDF, JPG या PNG · 10 MB तक", remove:"हटाएँ",
+  k3:"चरण 3 / 4", t3:"आपकी अपेक्षा क्या है?", s3:"किसी भी भाषा में लिख सकते हैं।",
+  fReq:"आपकी आवश्यकताएँ", hReq:"जैसे: सैलरी 5 लाख से ऊपर, अविवाहित, अहमदाबाद या बड़ौदा, शाकाहारी।",
+  chips:["सैलरी ₹5 लाख से ऊपर","अविवाहित","एक ही शहर","शाकाहारी","सरकारी नौकरी","उच्च शिक्षा"],
+  k4:"चरण 4 / 4", t4:"कृपया जानकारी जाँच लें", s4:"एक बार पढ़ें। कुछ ग़लत हो तो वापस जाकर बदलें।",
+  k5:"लगभग पूरा", t5:"योजना चुनें", s5:"मुफ़्त शुरू करें। कभी भी बढ़ाएँ।",
+  plans:[{n:"1 महीना",p:"नि:शुल्क",d:"30 दिन तक पूरी प्रोफ़ाइल साझा।",tag:"यहाँ से शुरू करें"},
+         {n:"3 महीने",p:"₹100",d:"90 दिन प्राथमिकता से मिलान और फ़ॉलो-अप।"},
+         {n:"आजीवन",p:"₹1100",d:"एक बार भुगतान। रिश्ता तय होने तक हम प्रयास करते रहेंगे।"}],
+  payNote:"इस UPI id पर भुगतान करें, फिर संदेश भेजें। स्क्रीनशॉट WhatsApp पर भेजें।",
+  copy:"कॉपी",
+  consent:"ऊपर दी गई जानकारी मेरी जानकारी में सही है, और मैं इसे विवाह हेतु साझा करने की अनुमति देता/देती हूँ।",
+  consentErr:"आगे बढ़ने के लिए स्वीकार करें।",
+  sendWa:"WhatsApp पर भेजें", waHint:"WhatsApp खुलेगा, सारांश तैयार रहेगा। बायोडाटा फ़ाइल भी वहीं भेजें।",
+  next:"आगे", back:"पीछे", review:"समीक्षा", edit:"बदलें", looksGood:"सही है",
+  reqErr:"यह जानकारी आवश्यक है।", waErr:"मान्य 10 अंकों का नंबर दर्ज करें।",
+  fileErr:"कृपया बायोडाटा फ़ाइल अपलोड करें।",
+  doneT:"हम पर विश्वास रखने के लिए धन्यवाद", doneS:"आपकी जानकारी मिल गई है। हम शीघ्र ही WhatsApp पर उत्तर देंगे।",
+  again:"दूसरा भेजें", footNote:"आपकी जानकारी सार्वजनिक नहीं की जाती।",
+  openWa:"WhatsApp खोलें", openWaAlt:"WhatsApp Web खोलें", copyMsg:"संदेश कॉपी करें", copied:"कॉपी हो गया",
+  openWaHint:"अगर WhatsApp न खुले, तो ऊपर का बटन दबाएँ।",
+  mTitle:"नया बायोडाटा", mFor:"बायोडाटा", mBy:"भेजने वाले", mRel:"संबंध",
+  mWa:"WhatsApp", mReq:"अपेक्षा", mPlan:"योजना", mRef:"क्रमांक"
+ },
+ gu:{
+  eyebrow:"વિશ્વસનીય · ગોપનીય", brand:"આદિનાથ મેટ્રિમોની",
+  heroSub:"તમારો બાયોડેટા અમને મોકલો. અમે અમારા સમાજમાં આદર અને ગોપનીયતા સાથે મેળ કરીએ છીએ — ક્યાંય જાહેર કરવામાં આવતું નથી.",
+  heroCta:"બાયોડેટા મોકલો", scroll:"શરૂ કરવા નીચે સ્ક્રોલ કરો",
+  k1:"પગલું 1 / 4", t1:"તમારી માહિતી", s1:"જેથી અમે તમને જવાબ આપી શકીએ.",
+  fYourName:"તમારું પૂરું નામ (Name) *", fWa:"તમારો WhatsApp નંબર *", hWa:"10 અંક, ભારત (+91)",
+  fRelation:"આ વ્યક્તિ સાથે તમારો સંબંધ *",
+  rel:["પસંદ કરો","પોતે","દીકરી","દીકરો","બહેન","ભાઈ","સગાં","મિત્ર","અન્ય"],
+  k2:"પગલું 2 / 4", t2:"બાયોડેટાની માહિતી", s2:"કોનો બાયોડેટા મોકલી રહ્યા છો?",
+  fPerson:"વ્યક્તિનું નામ (Name) *", fGender:"લિંગ *", gen:["પસંદ કરો","સ્ત્રી","પુરુષ"],
+  fBirth:"જન્મ વર્ષ", fCity:"શહેર",
+  fFile:"બાયોડેટા અપલોડ કરો *", dropTitle:"ફાઈલ પસંદ કરવા ક્લિક કરો",
+  dropHint:"PDF, JPG કે PNG · 10 MB સુધી", remove:"દૂર કરો",
+  k3:"પગલું 3 / 4", t3:"તમારી અપેક્ષા શું છે?", s3:"કોઈ પણ ભાષામાં લખી શકો છો.",
+  fReq:"તમારી જરૂરિયાત", hReq:"જેમ કે: પગાર 5 લાખથી વધુ, અવિવાહિત, અમદાવાદ કે વડોદરા, શાકાહારી.",
+  chips:["પગાર ₹5 લાખથી વધુ","અવિવાહિત","એક જ શહેર","શાકાહારી","સરકારી નોકરી","ઉચ્ચ શિક્ષણ"],
+  k4:"પગલું 4 / 4", t4:"કૃપા કરી માહિતી તપાસો", s4:"એક વાર વાંચો. કંઈ ખોટું હોય તો પાછળ જઈ સુધારો.",
+  k5:"લગભગ પૂરું", t5:"યોજના પસંદ કરો", s5:"મફત શરૂ કરો. ગમે ત્યારે વધારો.",
+  plans:[{n:"1 મહિનો",p:"મફત",d:"30 દિવસ સુધી પૂરી પ્રોફાઇલ શેર.",tag:"અહીંથી શરૂ કરો"},
+         {n:"3 મહિના",p:"₹100",d:"90 દિવસ પ્રાથમિકતાથી મેળ અને ફોલો-અપ."},
+         {n:"આજીવન",p:"₹1100",d:"એક વાર ચુકવણી. સંબંધ નક્કી થાય ત્યાં સુધી અમે પ્રયત્ન કરીશું."}],
+  payNote:"આ UPI id પર ચુકવણી કરો, પછી સંદેશ મોકલો. સ્ક્રીનશોટ WhatsApp પર મોકલો.",
+  copy:"કૉપિ",
+  consent:"ઉપરની માહિતી મારી જાણ મુજબ સાચી છે, અને હું તેને લગ્ન હેતુ શેર કરવાની પરવાનગી આપું છું.",
+  consentErr:"આગળ વધવા સ્વીકારો.",
+  sendWa:"WhatsApp પર મોકલો", waHint:"WhatsApp ખુલશે, સારાંશ તૈયાર હશે. બાયોડેટા ફાઈલ પણ ત્યાં મોકલો.",
+  next:"આગળ", back:"પાછળ", review:"સમીક્ષા", edit:"સુધારો", looksGood:"બરાબર છે",
+  reqErr:"આ માહિતી જરૂરી છે.", waErr:"માન્ય 10 અંકનો નંબર દાખલ કરો.",
+  fileErr:"કૃપા કરી બાયોડેટા ફાઈલ અપલોડ કરો.",
+  doneT:"અમારા પર વિશ્વાસ રાખવા બદલ આભાર", doneS:"તમારી માહિતી મળી ગઈ છે. અમે ટૂંક સમયમાં WhatsApp પર જવાબ આપીશું.",
+  again:"બીજો મોકલો", footNote:"તમારી માહિતી જાહેર કરવામાં આવતી નથી.",
+  openWa:"WhatsApp ખોલો", openWaAlt:"WhatsApp Web ખોલો", copyMsg:"સંદેશ કૉપિ કરો", copied:"કૉપિ થયું",
+  openWaHint:"જો WhatsApp ન ખૂલે, તો ઉપરનું બટન દબાવો.",
+  mTitle:"નવો બાયોડેટા", mFor:"બાયોડેટા", mBy:"મોકલનાર", mRel:"સંબંધ",
+  mWa:"WhatsApp", mReq:"અપેક્ષા", mPlan:"યોજના", mRef:"ક્રમાંક"
+ }
+};
+
+var L="en", planIdx=0, fileObj=null, fileB64="", fileUrl="", lastMsg="";
+function waUrl(){
+  return "https://api.whatsapp.com/send/?phone="+BRAND_WA+
+         "&text="+encodeURIComponent(lastMsg)+"&type=phone_number&app_absent=0";
+}
+function launchWhatsApp(){
+  var u=waUrl();
+  $("waLink").href=u;
+  try{ window.open(u,"_blank","noopener"); }catch(e){}
+}
+function isMobile(){
+  return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
+      || (navigator.maxTouchPoints>1 && /Mac/.test(navigator.platform));
+}
+var $=function(id){return document.getElementById(id)};
+
+function apply(lang){
+  L=lang; var d=T[lang];
+  document.body.setAttribute("data-lang",lang);
+  document.documentElement.setAttribute("lang",lang);
+  $("langSel").value=lang;
+  document.querySelectorAll("[data-t]").forEach(function(el){
+    var v=d[el.getAttribute("data-t")]; if(typeof v==="string") el.textContent=v;
+  });
+  fill("relation",d.rel); fill("gender",d.gen);
+  $("req").placeholder=d.hReq;
+  $("chips").innerHTML=d.chips.map(function(c){return '<button type="button" class="chip">'+c+'</button>'}).join("");
+  $("chips").querySelectorAll(".chip").forEach(function(b){
+    b.onclick=function(){
+      var t=$("req"), txt=b.textContent;
+      if(t.value.indexOf(txt)>-1) return;
+      t.value=(t.value?t.value.replace(/[,\s]+$/,"")+", ":"")+txt; t.focus();
+    };
+  });
+  $("plans").innerHTML=d.plans.map(function(p,i){
+    return '<label class="plan'+(i===planIdx?' sel':'')+'" data-i="'+i+'">'+
+      (p.tag?'<span class="tag">'+p.tag+'</span>':'')+
+      '<input type="radio" name="plan" '+(i===planIdx?'checked':'')+'>'+
+      '<div class="top"><span class="nm">'+p.n+'</span><span class="pr">'+p.p+'</span></div>'+
+      '<div class="ds">'+p.d+'</div></label>';
+  }).join("");
+  $("plans").querySelectorAll(".plan").forEach(function(el){
+    el.onclick=function(){ planIdx=+el.getAttribute("data-i"); apply(L); };
+  });
+  $("paybox").classList.toggle("show", planIdx>0);
+  $("upiId").textContent=UPI_ID;
+}
+function fill(id,arr){
+  var s=$(id), cur=s.selectedIndex;
+  s.innerHTML=arr.map(function(o,i){return '<option value="'+(i===0?"":o)+'">'+o+'</option>'}).join("");
+  if(cur>0) s.selectedIndex=cur;
+}
+document.querySelectorAll(".langbtn").forEach(function(b){
+  b.onclick=function(){ apply(b.getAttribute("data-set")); $("gate").remove(); $("app").style.display="block"; };
+});
+$("langSel").onchange=function(){ apply(this.value); };
+
+/* logo fallback if logo.png is missing */
+$("logo").onerror=function(){
+  this.outerHTML='<svg viewBox="0 0 120 120" width="100%" height="100%" role="img" aria-label="Logo">'+
+   '<circle cx="60" cy="60" r="56" fill="none" stroke="var(--gold)" stroke-width="1.5"/>'+
+   '<circle cx="60" cy="60" r="46" fill="var(--maroon)"/>'+
+   '<text x="60" y="60" text-anchor="middle" dominant-baseline="central" fill="#fff" '+
+   'font-family="Fraunces,serif" font-size="34">A</text></svg>';
+};
+
+/* navigation */
+function show(id){
+  ["p1","p2","p3","p4","p5","p6"].forEach(function(p){ $(p).classList.toggle("hidden",p!==id); });
+  if(id==="p4") buildReview();
+  window.scrollTo({top:$("start").offsetTop-10,behavior:"smooth"});
+}
+function bad(id,cond){ $("e_"+id).classList.toggle("show",cond); return cond; }
+function validate(step){
+  var f=false;
+  if(step==="p1"){
+    f = bad("yourName",!$("yourName").value.trim()) | f;
+    f = bad("wa",!/^[6-9]\d{9}$/.test($("wa").value.replace(/\D/g,""))) | f;
+    f = bad("relation",!$("relation").value) | f;
+  }
+  if(step==="p2"){
+    f = bad("person",!$("person").value.trim()) | f;
+    f = bad("gender",!$("gender").value) | f;
+    f = bad("file",!fileObj) | f;
+  }
+  return !f;
+}
+document.querySelectorAll("[data-go]").forEach(function(b){
+  b.onclick=function(){
+    var to=b.getAttribute("data-go"), from=b.closest(".pane").id;
+    var order=["p1","p2","p3","p4","p5"];
+    if(order.indexOf(to)>order.indexOf(from) && !validate(from)) return;
+    show(to);
+  };
+});
+
+/* file handling */
+$("drop").onclick=function(){ $("file").click(); };
+$("file").onchange=function(){
+  var f=this.files[0]; if(!f) return;
+  if(f.size>10*1024*1024){ alert("Max 10 MB"); this.value=""; return; }
+  fileObj=f; if(fileUrl) URL.revokeObjectURL(fileUrl); fileUrl=URL.createObjectURL(f);
+  $("fileName").textContent=f.name;
+  $("filebar").classList.add("show");
+  $("e_file").classList.remove("show");
+  var r=new FileReader(); r.onload=function(){ fileB64=r.result; }; r.readAsDataURL(f);
+};
+$("fileClear").onclick=function(){
+  fileObj=null; fileB64=""; $("file").value=""; $("filebar").classList.remove("show");
+  if(fileUrl){URL.revokeObjectURL(fileUrl);fileUrl="";}
+};
+
+/* review + preview */
+function data(){
+  var d=T[L];
+  return {
+    yourName:$("yourName").value.trim(), wa:$("wa").value.replace(/\D/g,""),
+    relation:$("relation").value, person:$("person").value.trim(),
+    gender:$("gender").value, birth:$("birth").value, city:$("city").value.trim(),
+    req:$("req").value.trim(), plan:d.plans[planIdx].n+" — "+d.plans[planIdx].p,
+    file:fileObj?fileObj.name:""
+  };
+}
+function buildReview(){
+  var d=T[L], v=data();
+  var rows=[[d.fPerson,v.person],[d.fGender,v.gender],[d.fBirth,v.birth],[d.fCity,v.city],
+            [d.fYourName,v.yourName],[d.fRelation,v.relation],[d.fWa,"+91 "+v.wa],
+            [d.fReq,v.req],[d.fFile,v.file]];
+  $("rev").innerHTML=rows.filter(function(r){return r[1]})
+    .map(function(r){return '<div class="row"><span class="k">'+r[0].replace(" *","")+
+      '</span><span class="v">'+esc(r[1])+'</span></div>'}).join("");
+  var vw=$("viewer");
+  if(fileObj){
+    vw.classList.remove("hidden");
+    vw.innerHTML = /pdf$/i.test(fileObj.type)||/\.pdf$/i.test(fileObj.name)
+      ? '<iframe src="'+fileUrl+'#toolbar=0" title="Biodata preview"></iframe>'
+      : '<img src="'+fileUrl+'" alt="Biodata preview">';
+  } else vw.classList.add("hidden");
+}
+function esc(s){return String(s).replace(/[<>&]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;"}[c]})}
+
+/* copy upi */
+$("copyUpi").onclick=function(){
+  navigator.clipboard&&navigator.clipboard.writeText(UPI_ID);
+  this.textContent="✓";
+  var self=this; setTimeout(function(){ self.textContent=T[L].copy; },1500);
+};
+
+/* submit */
+$("send").onclick=function(){
+  if(!$("consent").checked){ $("e_consent").classList.add("show"); return; }
+  $("e_consent").classList.remove("show");
+  var d=T[L], v=data();
+  var ref="BD-"+Date.now().toString().slice(-6);
+
+  if(API_URL){
+    try{
+      fetch(API_URL,{method:"POST",mode:"no-cors",
+        headers:{"Content-Type":"text/plain;charset=utf-8"},
+        body:JSON.stringify(Object.assign({ref:ref,lang:L,file:fileB64,fileName:v.file},v))});
+    }catch(e){}
+  }
+
+  var m="*"+d.mTitle+"*\n"+
+    "\n"+d.mFor+": "+v.person+
+    (v.gender?" ("+v.gender+(v.birth?", "+v.birth:"")+(v.city?", "+v.city:"")+")":"")+
+    "\n"+d.mBy+": "+v.yourName+" ("+v.relation+")"+
+    "\n"+d.mWa+": +91 "+v.wa+
+    (v.req?"\n"+d.mReq+": "+v.req:"")+
+    "\n"+d.mPlan+": "+v.plan+
+    "\n"+d.mRef+": "+ref;
+
+  lastMsg=m;
+  $("ref").textContent=d.mRef+": "+ref;
+  show("p6");
+  launchWhatsApp();
+};
+
+$("copyMsg").onclick=function(){
+  var self=this;
+  function done(){ self.textContent=T[L].copied;
+    setTimeout(function(){ self.textContent=T[L].copyMsg; },1600); }
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(lastMsg).then(done,fallback);
+  } else fallback();
+  function fallback(){
+    var ta=document.createElement("textarea");
+    ta.value=lastMsg; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); done(); }catch(e){ alert(lastMsg); }
+    document.body.removeChild(ta);
+  }
+};
+$("again").onclick=function(){ location.reload(); };
+
+apply("en");
+</script>
+</body>
+</html>
