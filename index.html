@@ -102,9 +102,10 @@ h1,h2,h3{font-variant-numeric:lining-nums;font-family:"Cormorant Garamond","Noto
 
 /* ---------- hero ---------- */
 #app{display:none}
+#app.on{display:block}
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;text-align:center;
-  padding:46px 20px 108px;overflow:hidden;
+  padding:46px 20px 120px;overflow:hidden;
   background:
     radial-gradient(60% 40% at 88% 8%, rgba(214,73,104,.16) 0%, transparent 60%),
     radial-gradient(55% 40% at 8% 22%, rgba(214,73,104,.13) 0%, transparent 60%),
@@ -123,8 +124,8 @@ h1,h2,h3{font-variant-numeric:lining-nums;font-family:"Cormorant Garamond","Noto
 .hero h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .hero .divider{width:88px;height:9px;margin:14px auto 16px;opacity:.9}
 .hero p{color:var(--muted);margin:0 auto 26px;max-width:36ch;font-size:15px}
-.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;
-  margin-top:30px;max-width:460px}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 18px;
+  margin-top:28px;max-width:460px}
 .trust div{display:flex;flex-direction:column;align-items:center;gap:6px;
   width:78px;font-size:11px;line-height:1.35;color:var(--muted)}
 .trust span{width:38px;height:38px;border-radius:50%;background:#FFF6E9;
@@ -165,10 +166,13 @@ h1,h2,h3{font-variant-numeric:lining-nums;font-family:"Cormorant Garamond","Noto
 section.pane{padding:56px 0 72px}
 /* two columns from tablet up */
 @media (min-width:960px){
-  #app{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:start}
+  #app.on{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:start}
   .hero{position:sticky;top:0;height:100svh;min-height:0;padding:40px 28px 70px;
     border-right:1px solid var(--line)}
-  .hero .trust{margin-top:24px}
+  .hero .trust{margin-top:26px;max-width:430px;gap:14px 10px}
+  .hero .trust div{width:74px;font-size:10.5px}
+  .hero .scrolldown{display:none}
+  .hero p{margin-bottom:22px}
   .panel{min-height:100svh;background:var(--surface)}
   section.pane{padding:34px 0 64px}
   .wrap{max-width:560px;padding:0 34px}
@@ -866,7 +870,7 @@ function fill(id,arr){
 }
 document.querySelectorAll(".langbtn").forEach(function(b){
   b.onclick=function(){ apply(b.getAttribute("data-set")); saveDraft();
-    $("gate").remove(); $("app").style.display="block"; };
+    $("gate").remove(); $("app").classList.add("on"); };
 });
 $("langSel").onchange=function(){ apply(this.value); };
 
