@@ -264,7 +264,7 @@ footer{text-align:center;padding:30px 20px calc(36px + env(safe-area-inset-botto
           <b data-t="dropTitle"></b>
           <div class="hint" data-t="dropHint"></div>
         </div>
-        <input type="file" id="file" accept=".pdf,.jpg,.jpeg,.png" class="hidden">
+        <input type="file" id="file" accept="image/*,application/pdf,.pdf,.heic,.heif" class="hidden">
         <div class="filebar" id="filebar">
           <span class="nm" id="fileName"></span>
           <button type="button" id="fileClear" data-t="remove"></button>
@@ -376,6 +376,7 @@ footer{text-align:center;padding:30px 20px calc(36px + env(safe-area-inset-botto
 /* ============ CONFIG — edit these three lines only ============ */
 var BRAND_WA   = "919106141806";                 // your WhatsApp number, country code, no +
 var UPI_ID     = "yourname@okhdfcbank";          // your UPI id
+var MAX_MB     = 10;                             // largest upload allowed
 var API_URL    = "https://script.google.com/macros/s/AKfycbwG1Li3revS2DTjy7H9lhILADil5rbxYDlb5lwGZU0Ab2FeoQGCoDE4BbDt4pQHcDsX/exec";
 /* ============================================================== */
 
@@ -409,6 +410,8 @@ var T = {
   next:"Continue", back:"Back", review:"Review", edit:"Edit", looksGood:"Looks correct",
   reqErr:"This field is required.", waErr:"Enter a valid 10-digit number.",
   fileErr:"Please upload the biodata file.",
+  sizeErr:"This file is {n} MB. Please upload a file below 10 MB.",
+  sizeTip:"Tip: open the photo, crop it, or send a PDF instead.",
   doneT:"Thank you for trusting us", doneS:"We have received your details and will reply shortly on WhatsApp.",
   again:"Submit another", footNote:"Your details are never shared publicly.",
   openWa:"Open WhatsApp", openWaAlt:"Use WhatsApp Web", copyMsg:"Copy message", copied:"Copied",
@@ -445,6 +448,8 @@ var T = {
   next:"आगे", back:"पीछे", review:"समीक्षा", edit:"बदलें", looksGood:"सही है",
   reqErr:"यह जानकारी आवश्यक है।", waErr:"मान्य 10 अंकों का नंबर दर्ज करें।",
   fileErr:"कृपया बायोडाटा फ़ाइल अपलोड करें।",
+  sizeErr:"यह फ़ाइल {n} MB की है। कृपया 10 MB से कम की फ़ाइल अपलोड करें।",
+  sizeTip:"सुझाव: फ़ोटो को क्रॉप करें, या PDF भेजें।",
   doneT:"हम पर विश्वास रखने के लिए धन्यवाद", doneS:"आपकी जानकारी मिल गई है। हम शीघ्र ही WhatsApp पर उत्तर देंगे।",
   again:"दूसरा भेजें", footNote:"आपकी जानकारी सार्वजनिक नहीं की जाती।",
   openWa:"WhatsApp खोलें", openWaAlt:"WhatsApp Web खोलें", copyMsg:"संदेश कॉपी करें", copied:"कॉपी हो गया",
@@ -481,6 +486,8 @@ var T = {
   next:"આગળ", back:"પાછળ", review:"સમીક્ષા", edit:"સુધારો", looksGood:"બરાબર છે",
   reqErr:"આ માહિતી જરૂરી છે.", waErr:"માન્ય 10 અંકનો નંબર દાખલ કરો.",
   fileErr:"કૃપા કરી બાયોડેટા ફાઈલ અપલોડ કરો.",
+  sizeErr:"આ ફાઈલ {n} MB ની છે. કૃપા કરી 10 MB થી ઓછી ફાઈલ અપલોડ કરો.",
+  sizeTip:"સૂચન: ફોટો ક્રોપ કરો, અથવા PDF મોકલો.",
   doneT:"અમારા પર વિશ્વાસ રાખવા બદલ આભાર", doneS:"તમારી માહિતી મળી ગઈ છે. અમે ટૂંક સમયમાં WhatsApp પર જવાબ આપીશું.",
   again:"બીજો મોકલો", footNote:"તમારી માહિતી જાહેર કરવામાં આવતી નથી.",
   openWa:"WhatsApp ખોલો", openWaAlt:"WhatsApp Web ખોલો", copyMsg:"સંદેશ કૉપિ કરો", copied:"કૉપિ થયું",
@@ -491,6 +498,14 @@ var T = {
 };
 
 var L="en", planIdx=0, fileObj=null, fileB64="", fileUrl="", lastMsg="";
+function withFile(cb){
+  if(!fileObj) return cb("");
+  if(fileB64) return cb(fileB64);
+  var r=new FileReader();
+  r.onload=function(){ fileB64=r.result; cb(fileB64); };
+  r.onerror=function(){ cb(""); };
+  r.readAsDataURL(fileObj);
+}
 function makeRef(name){
   var n=new Date(), p=function(x){return ("0"+x).slice(-2)};
   var ymd=String(n.getFullYear()).slice(2)+p(n.getMonth()+1)+p(n.getDate());
@@ -597,11 +612,18 @@ document.querySelectorAll("[data-go]").forEach(function(b){
 $("drop").onclick=function(){ $("file").click(); };
 $("file").onchange=function(){
   var f=this.files[0]; if(!f) return;
-  if(f.size>10*1024*1024){ alert("Max 10 MB"); this.value=""; return; }
+  var e=$("e_file");
+  if(f.size>MAX_MB*1024*1024){
+    e.textContent=T[L].sizeErr.replace("{n}",(f.size/1048576).toFixed(1))+" "+T[L].sizeTip;
+    e.classList.add("show");
+    this.value=""; fileObj=null; fileB64="";
+    $("filebar").classList.remove("show");
+    return;
+  }
   fileObj=f; if(fileUrl) URL.revokeObjectURL(fileUrl); fileUrl=URL.createObjectURL(f);
   $("fileName").textContent=f.name;
   $("filebar").classList.add("show");
-  $("e_file").classList.remove("show");
+  e.textContent=T[L].fileErr; e.classList.remove("show");
   var r=new FileReader(); r.onload=function(){ fileB64=r.result; }; r.readAsDataURL(f);
 };
 $("fileClear").onclick=function(){
@@ -653,11 +675,13 @@ $("send").onclick=function(){
   var ref=makeRef(v.person);
 
   if(API_URL){
-    try{
-      fetch(API_URL,{method:"POST",mode:"no-cors",
-        headers:{"Content-Type":"text/plain;charset=utf-8"},
-        body:JSON.stringify(Object.assign({ref:ref,lang:L,file:fileB64,fileName:v.file},v))});
-    }catch(e){}
+    withFile(function(b64){
+      try{
+        fetch(API_URL,{method:"POST",mode:"no-cors",
+          headers:{"Content-Type":"text/plain;charset=utf-8"},
+          body:JSON.stringify(Object.assign({},v,{ref:ref,lang:L,file:b64,fileName:v.file}))});
+      }catch(e){}
+    });
   }
 
   var m="*"+d.mTitle+"*\n"+
