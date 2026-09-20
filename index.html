@@ -3,7 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Adinath Matrimony — Share a Biodata</title>
+<title>Adinath Matrimony — Share a biodata</title>
+<meta name="description" content="Share a biodata with Adinath Matrimony. We match within our community, privately and with respect. No public listing.">
+<meta name="theme-color" content="#A5152F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Adinath Matrimony">
+<meta property="og:description" content="More than matches — a community for life. Share a biodata privately.">
+<meta property="og:image" content="https://adinathmatrimony.github.io/first-page.jpg">
+<meta property="og:url" content="https://adinathmatrimony.github.io/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;600&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Gujarati:wght@400;500;600&display=swap" rel="stylesheet">
@@ -60,14 +68,28 @@ h1,h2,h3{font-family:"Cormorant Garamond","Noto Sans Devanagari","Noto Sans Guja
 .langbtn:hover,.langbtn:focus-visible{border-color:var(--gold);background:#FFF9F0}
 .langbtn small{color:var(--gold-ink);font-size:12.5px}
 
-/* phones: show the top of the artwork, card underneath */
+/* phones: artwork fills the screen, card floats in the middle */
 @media (max-width:859px){
-  #gate{align-items:flex-start;padding-top:0}
-  .art{max-width:480px}
-  .poster{max-height:34svh;object-fit:cover;object-position:50% 0}
-  #gate .card{margin:-14px 12px 0;position:relative}
+  #gate{padding:0;align-items:center;overflow:hidden}
+  .art{position:fixed;inset:0;max-width:none;display:flex;
+    align-items:center;justify-content:center}
+  .poster{position:absolute;inset:0;width:100%;height:100%;
+    max-height:none;object-fit:cover;object-position:50% 18%}
+  .art::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(255,248,238,.10) 0%,
+      rgba(255,248,238,.42) 42%,
+      rgba(255,248,238,.42) 72%,
+      rgba(110,11,32,.10) 100%)}
+  #gate .card{position:relative;z-index:2;width:min(90%,400px);margin:0;
+    box-shadow:0 20px 50px rgba(60,10,22,.34)}
+  .gate-pick{padding:24px 20px 26px}
 }
-@media (max-height:680px) and (max-width:859px){ .poster{max-height:25svh} }
+@media (max-height:640px) and (max-width:859px){
+  .gate-pick{padding:18px 18px 20px}
+  .gate-pick h1{font-size:21px}
+  .langbtn{padding:12px 15px;margin-top:7px}
+}
 
 /* laptops: the live card sits exactly where the printed one was */
 @media (min-width:860px){
@@ -194,7 +216,8 @@ label span{color:var(--maroon)}
 input,select,textarea{width:100%;padding:14px 15px;border:1px solid var(--line);
   border-radius:var(--radius);background:var(--surface);color:var(--text);
   font-family:inherit;font-size:16px}
-input:focus,select,textarea:focus{outline:2px solid var(--maroon-soft);outline-offset:1px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--maroon-soft);outline-offset:1px}
+.langbtn:focus-visible,.btn:focus-visible,.plan:focus-within{outline:2px solid var(--maroon-soft);outline-offset:2px}
 textarea{min-height:120px;resize:vertical}
 .hint{font-size:13px;color:var(--muted);margin-top:6px}
 .err{font-size:13px;color:#C0392B;margin-top:6px;display:none}
@@ -249,6 +272,11 @@ textarea{min-height:120px;resize:vertical}
 
 /* ---------- done ---------- */
 .done{text-align:center;padding:80px 0 90px}
+.refbox{display:inline-flex;flex-direction:column;gap:3px;margin:4px auto 6px;
+  padding:13px 24px;border:1px dashed var(--gold);border-radius:10px;
+  background:var(--surface-2)}
+.refbox span{font-size:11.5px;color:var(--muted)}
+.refbox b{font-family:ui-monospace,monospace;font-size:15px;color:var(--maroon);font-weight:500}
 .done .tick{width:66px;height:66px;border-radius:50%;background:var(--maroon);color:#fff;
   display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 22px}
 footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-bottom,0px));
@@ -388,8 +416,16 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
           </div>
         </div>
 
-        <label data-t="fCity"></label>
-        <input id="city">
+        <div class="two">
+          <div>
+            <label data-t="fCity"></label>
+            <input id="city">
+          </div>
+          <div>
+            <label data-t="fCommunity"></label>
+            <select id="community"></select>
+          </div>
+        </div>
 
         <label data-t="fFile"></label>
         <div class="drop" id="drop">
@@ -481,7 +517,7 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
         <div class="tick">✓</div>
         <h2 data-t="doneT"></h2>
         <p class="sub" data-t="doneS"></p>
-        <div id="ref" style="font-family:ui-monospace,monospace;font-size:15px;color:var(--maroon)"></div>
+        <div class="refbox"><span data-t="refLabel"></span><b id="ref"></b></div>
         <div style="margin-top:22px">
           <a class="btn btn-wa" id="waLink" href="#" target="_blank" rel="noopener" data-t="openWa"></a>
         </div>
@@ -558,7 +594,8 @@ var T = {
   rel:["Select","Self","Daughter","Son","Sister","Brother","Relative","Friend","Other"],
   k2:"Step 2 of 4", t2:"Biodata details", s2:"Whose biodata are you sharing?",
   fPerson:"Name of the person *", fGender:"Gender *", gen:["Select","Female","Male"],
-  fBirth:"Birth year", fCity:"City",
+  fBirth:"Birth year", fCity:"City", fCommunity:"Community",
+  comm:["Select","Jain","Patel / Patidar","Vaishnav","Lohana","Kadva / Leuva","Marwari / Maheshwari","Agarwal","Sindhi","Soni","Prajapati","Brahmin","Kshatriya","Other"],
   fFile:"Upload the biodata *", dropTitle:"Tap to choose a file",
   dropHint:"PDF, Word or photo · up to 10 MB", remove:"Remove",
   k3:"Step 3 of 4", t3:"What are you looking for?", s3:"Write freely — any language is fine.",
@@ -581,7 +618,7 @@ var T = {
   sizeErr:"This file is {n} MB. Please upload a file below 10 MB.",
   sizeTip:"Tip: open the photo, crop it, or send a PDF instead.",
   doneT:"Thank you for trusting us", doneS:"We have received your details and will reply shortly on WhatsApp.",
-  again:"Submit another", footNote:"Your details are never shared publicly.",
+  refLabel:"Keep this reference number", again:"Submit another", footNote:"Your details are never shared publicly.",
   stepNames:["About you","Biodata","Preferences","Review"],
   safeT:"Your information is safe with us.",
   safeS:"We never share your details publicly.",
@@ -606,7 +643,8 @@ var T = {
   rel:["चुनें","स्वयं","बेटी","बेटा","बहन","भाई","रिश्तेदार","मित्र","अन्य"],
   k2:"चरण 2 / 4", t2:"बायोडाटा की जानकारी", s2:"किसका बायोडाटा भेज रहे हैं?",
   fPerson:"व्यक्ति का नाम (Name) *", fGender:"लिंग *", gen:["चुनें","स्त्री","पुरुष"],
-  fBirth:"जन्म वर्ष", fCity:"शहर",
+  fBirth:"जन्म वर्ष", fCity:"शहर", fCommunity:"समाज",
+  comm:["चुनें","जैन","पटेल / पाटीदार","वैष्णव","लोहाणा","कड़वा / लेउवा","मारवाड़ी / माहेश्वरी","अग्रवाल","सिंधी","सोनी","प्रजापति","ब्राह्मण","क्षत्रिय","अन्य"],
   fFile:"बायोडाटा अपलोड करें *", dropTitle:"फ़ाइल चुनने के लिए दबाएँ",
   dropHint:"PDF, Word या फ़ोटो · 10 MB तक", remove:"हटाएँ",
   k3:"चरण 3 / 4", t3:"आपकी अपेक्षा क्या है?", s3:"किसी भी भाषा में लिख सकते हैं।",
@@ -629,7 +667,7 @@ var T = {
   sizeErr:"यह फ़ाइल {n} MB की है। कृपया 10 MB से कम की फ़ाइल अपलोड करें।",
   sizeTip:"सुझाव: फ़ोटो को क्रॉप करें, या PDF भेजें।",
   doneT:"हम पर विश्वास रखने के लिए धन्यवाद", doneS:"आपकी जानकारी मिल गई है। हम शीघ्र ही WhatsApp पर उत्तर देंगे।",
-  again:"दूसरा भेजें", footNote:"आपकी जानकारी सार्वजनिक नहीं की जाती।",
+  refLabel:"यह क्रमांक सुरक्षित रखें", again:"दूसरा भेजें", footNote:"आपकी जानकारी सार्वजनिक नहीं की जाती।",
   stepNames:["आपकी जानकारी","बायोडाटा","अपेक्षा","समीक्षा"],
   safeT:"आपकी जानकारी सुरक्षित है।",
   safeS:"हम आपकी जानकारी सार्वजनिक नहीं करते।",
@@ -654,7 +692,8 @@ var T = {
   rel:["પસંદ કરો","પોતે","દીકરી","દીકરો","બહેન","ભાઈ","સગાં","મિત્ર","અન્ય"],
   k2:"પગલું 2 / 4", t2:"બાયોડેટાની માહિતી", s2:"કોનો બાયોડેટા મોકલી રહ્યા છો?",
   fPerson:"વ્યક્તિનું નામ (Name) *", fGender:"લિંગ *", gen:["પસંદ કરો","સ્ત્રી","પુરુષ"],
-  fBirth:"જન્મ વર્ષ", fCity:"શહેર",
+  fBirth:"જન્મ વર્ષ", fCity:"શહેર", fCommunity:"સમાજ",
+  comm:["પસંદ કરો","જૈન","પટેલ / પાટીદાર","વૈષ્ણવ","લોહાણા","કડવા / લેઉવા","મારવાડી / માહેશ્વરી","અગ્રવાલ","સિંધી","સોની","પ્રજાપતિ","બ્રાહ્મણ","ક્ષત્રિય","અન્ય"],
   fFile:"બાયોડેટા અપલોડ કરો *", dropTitle:"ફાઈલ પસંદ કરવા ક્લિક કરો",
   dropHint:"PDF, Word કે ફોટો · 10 MB સુધી", remove:"દૂર કરો",
   k3:"પગલું 3 / 4", t3:"તમારી અપેક્ષા શું છે?", s3:"કોઈ પણ ભાષામાં લખી શકો છો.",
@@ -677,7 +716,7 @@ var T = {
   sizeErr:"આ ફાઈલ {n} MB ની છે. કૃપા કરી 10 MB થી ઓછી ફાઈલ અપલોડ કરો.",
   sizeTip:"સૂચન: ફોટો ક્રોપ કરો, અથવા PDF મોકલો.",
   doneT:"અમારા પર વિશ્વાસ રાખવા બદલ આભાર", doneS:"તમારી માહિતી મળી ગઈ છે. અમે ટૂંક સમયમાં WhatsApp પર જવાબ આપીશું.",
-  again:"બીજો મોકલો", footNote:"તમારી માહિતી જાહેર કરવામાં આવતી નથી.",
+  refLabel:"આ ક્રમાંક સાચવી રાખો", again:"બીજો મોકલો", footNote:"તમારી માહિતી જાહેર કરવામાં આવતી નથી.",
   stepNames:["તમારી માહિતી","બાયોડેટા","અપેક્ષા","સમીક્ષા"],
   safeT:"તમારી માહિતી સુરક્ષિત છે.",
   safeS:"અમે તમારી માહિતી જાહેર કરતા નથી.",
@@ -693,6 +732,25 @@ var T = {
 };
 
 var L="en", planIdx=0, fileObj=null, fileB64="", fileUrl="", lastMsg="";
+var FIELDS=["yourName","wa","relation","person","gender","birth","city","community","req"];
+function saveDraft(){
+  try{
+    var o={lang:L,plan:planIdx};
+    FIELDS.forEach(function(id){ o[id]=$(id).value; });
+    localStorage.setItem("adinath_draft", JSON.stringify(o));
+  }catch(e){}
+}
+function loadDraft(){
+  try{
+    var o=JSON.parse(localStorage.getItem("adinath_draft")||"null");
+    if(!o) return;
+    FIELDS.forEach(function(id){ if(o[id]) $(id).value=o[id]; });
+    if(typeof o.plan==="number") planIdx=o.plan;
+    if(o.lang) return o.lang;
+  }catch(e){}
+}
+function clearDraft(){ try{ localStorage.removeItem("adinath_draft"); }catch(e){} }
+
 function withFile(cb){
   if(!fileObj) return cb("");
   if(fileB64) return cb(fileB64);
@@ -731,7 +789,7 @@ function apply(lang){
   document.querySelectorAll("[data-t]").forEach(function(el){
     var v=d[el.getAttribute("data-t")]; if(typeof v==="string") el.textContent=v;
   });
-  fill("relation",d.rel); fill("gender",d.gen);
+  fill("relation",d.rel); fill("gender",d.gen); fill("community",d.comm);
   $("chips").innerHTML=d.chips.map(function(c){return '<button type="button" class="chip">'+c+'</button>'}).join("");
   $("chips").querySelectorAll(".chip").forEach(function(b){
     b.onclick=function(){
@@ -776,7 +834,8 @@ function fill(id,arr){
   if(cur>0) s.selectedIndex=cur;
 }
 document.querySelectorAll(".langbtn").forEach(function(b){
-  b.onclick=function(){ apply(b.getAttribute("data-set")); $("gate").remove(); $("app").style.display="block"; };
+  b.onclick=function(){ apply(b.getAttribute("data-set")); saveDraft();
+    $("gate").remove(); $("app").style.display="block"; };
 });
 $("langSel").onchange=function(){ apply(this.value); };
 
@@ -808,11 +867,20 @@ function validate(step){
   }
   return !f;
 }
+FIELDS.forEach(function(id){
+  var el=$(id); if(el) el.addEventListener("change",saveDraft);
+});
+
 document.querySelectorAll("[data-go]").forEach(function(b){
   b.onclick=function(){
     var to=b.getAttribute("data-go"), from=b.closest(".pane").id;
     var order=["p1","p2","p3","p4","p5"];
-    if(order.indexOf(to)>order.indexOf(from) && !validate(from)) return;
+    if(order.indexOf(to)>order.indexOf(from) && !validate(from)){
+      var bad=$(from).querySelector(".err.show");
+      if(bad) bad.scrollIntoView({behavior:"smooth",block:"center"});
+      return;
+    }
+    saveDraft();
     show(to);
   };
 });
@@ -847,13 +915,13 @@ function data(){
     yourName:$("yourName").value.trim(), wa:$("wa").value.replace(/\D/g,""),
     relation:$("relation").value, person:$("person").value.trim(),
     gender:$("gender").value, birth:$("birth").value, city:$("city").value.trim(),
-    req:$("req").value.trim(), plan:d.plans[planIdx].n+" — "+d.plans[planIdx].p,
+    community:$("community").value, req:$("req").value.trim(), plan:d.plans[planIdx].n+" — "+d.plans[planIdx].p,
     file:fileObj?fileObj.name:""
   };
 }
 function buildReview(){
   var d=T[L], v=data();
-  var rows=[[d.fPerson,v.person],[d.fGender,v.gender],[d.fBirth,v.birth],[d.fCity,v.city],
+  var rows=[[d.fPerson,v.person],[d.fGender,v.gender],[d.fBirth,v.birth],[d.fCity,v.city],[d.fCommunity,v.community],
             [d.fYourName,v.yourName],[d.fRelation,v.relation],[d.fWa,"+91 "+v.wa],
             [d.fReq,v.req],[d.fFile,v.file]];
   $("rev").innerHTML=rows.filter(function(r){return r[1]})
@@ -890,7 +958,7 @@ $("send").onclick=function(){
 
   var m="*"+d.mTitle+"*\n"+
     "\n"+d.mFor+": "+v.person+
-    (v.gender?" ("+v.gender+(v.birth?", "+v.birth:"")+(v.city?", "+v.city:"")+")":"")+
+    (v.gender?" ("+v.gender+(v.birth?", "+v.birth:"")+(v.city?", "+v.city:"")+(v.community?", "+v.community:"")+")":"")+
     "\n"+d.mBy+": "+v.yourName+" ("+v.relation+")"+
     "\n"+d.mWa+": +91 "+v.wa+
     (v.req?"\n"+d.mReq+": "+v.req:"")+
@@ -898,13 +966,13 @@ $("send").onclick=function(){
     "\n"+d.mRef+": "+ref;
 
   lastMsg=m;
-  $("ref").textContent=d.mRef+": "+ref;
+  $("ref").textContent=ref;
 
   var btn=this, done=false, label=btn.textContent;
   function finish(){
     if(done) return; done=true;
     btn.disabled=false; btn.textContent=label;
-    show("p6"); launchWhatsApp();
+    clearDraft(); show("p6"); launchWhatsApp();
   }
 
   if(!API_URL) return finish();
@@ -936,7 +1004,7 @@ $("copyMsg").onclick=function(){
     document.body.removeChild(ta);
   }
 };
-$("again").onclick=function(){ location.reload(); };
+$("again").onclick=function(){ clearDraft(); location.reload(); };
 
 (function(){
   var box=$("petals"); if(!box) return;
@@ -953,7 +1021,8 @@ $("again").onclick=function(){ location.reload(); };
   }
 })();
 
-apply("en");
+var saved=loadDraft();
+apply(saved||"en");
 </script>
 </body>
 </html>
