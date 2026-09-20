@@ -46,7 +46,7 @@ body{margin:0;background:var(--bg);color:var(--text);
 body[data-lang="hi"]{font-family:"Noto Sans Devanagari",Inter,sans-serif}
 body[data-lang="gu"]{font-family:"Noto Sans Gujarati",Inter,sans-serif}
 img{max-width:100%}
-h1,h2,h3{font-family:"Cormorant Garamond","Noto Sans Devanagari","Noto Sans Gujarati",serif;font-weight:600;line-height:1.25;margin:0}
+h1,h2,h3{font-variant-numeric:lining-nums;font-family:"Cormorant Garamond","Noto Sans Devanagari","Noto Sans Gujarati",serif;font-weight:600;line-height:1.25;margin:0}
 .wrap{width:100%;max-width:640px;margin:0 auto;padding:0 20px}
 
 /* ---------- language gate ---------- */
@@ -192,7 +192,7 @@ section.pane{padding:56px 0 72px}
 .steps .st:first-child::before{display:none}
 
 .backlink{display:inline-flex;align-items:center;gap:8px;background:none;border:none;
-  padding:0 0 18px;color:var(--ink);font-family:inherit;font-size:15px;cursor:pointer}
+  padding:2px 0 16px;margin-top:-4px;color:var(--ink);font-family:inherit;font-size:15px;cursor:pointer}
 .backlink:hover{color:var(--maroon)}
 
 .phone{display:flex;gap:9px}
@@ -212,7 +212,7 @@ section.pane{padding:56px 0 72px}
 h2{font-size:clamp(23px,5.5vw,30px)}
 .sub{color:var(--muted);margin:8px 0 26px}
 label{display:block;font-size:14px;font-weight:500;margin:18px 0 7px}
-label span{color:var(--maroon)}
+.pane label > span.req{color:var(--maroon)}
 input,select,textarea{width:100%;padding:14px 15px;border:1px solid var(--line);
   border-radius:var(--radius);background:var(--surface);color:var(--text);
   font-family:inherit;font-size:16px}
@@ -220,6 +220,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--maroon-soft);out
 .langbtn:focus-visible,.btn:focus-visible,.plan:focus-within{outline:2px solid var(--maroon-soft);outline-offset:2px}
 textarea{min-height:120px;resize:vertical}
 .hint{font-size:13px;color:var(--muted);margin-top:6px}
+.other{margin-top:9px;animation:drop .22s ease-out}
+@keyframes drop{from{opacity:0;transform:translateY(-4px)}}
 .err{font-size:13px;color:#C0392B;margin-top:6px;display:none}
 .err.show{display:block}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -252,22 +254,26 @@ textarea{min-height:120px;resize:vertical}
 
 /* ---------- plans ---------- */
 .plan{display:block;border:1.5px solid var(--line);border-radius:var(--radius);
-  background:var(--surface);padding:18px;margin-bottom:12px;cursor:pointer;position:relative}
+  background:var(--surface);padding:17px 18px;margin-bottom:11px;cursor:pointer;
+  position:relative;transition:border-color .15s,background .15s}
 .plan.sel{border-color:var(--maroon);background:var(--surface-2)}
 .plan .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .plan .nm{font-weight:500;font-size:17px}
-.plan .pr{font-family:"Cormorant Garamond",serif;font-size:24px;color:var(--maroon);white-space:nowrap}
+.plan .pr{font-family:Inter,sans-serif;font-size:19px;font-weight:600;
+  color:var(--maroon);white-space:nowrap;letter-spacing:-.01em;
+  font-variant-numeric:lining-nums tabular-nums}
 .plan .ds{color:var(--muted);font-size:14px;margin-top:5px}
-.tag{position:absolute;top:-10px;right:14px;background:var(--gold);color:#3B2703;
-  font-size:11px;padding:3px 10px;border-radius:999px;letter-spacing:.06em}
+.tag{position:absolute;top:12px;right:14px;background:#FBEFD8;color:var(--gold-ink);
+  font-size:10.5px;font-weight:500;padding:3px 9px;border-radius:999px;
+  border:1px solid var(--gold-soft)}
+.plan .top{padding-right:78px}
 .plan input{position:absolute;opacity:0;pointer-events:none}
 .paybox{border:1px solid var(--line);border-radius:var(--radius);padding:16px;
   background:var(--surface-2);margin-top:6px;display:none}
 .paybox.show{display:block}
-.upi{font-family:ui-monospace,monospace;font-size:15px;background:var(--surface);
-  border:1px solid var(--line);padding:10px 12px;border-radius:10px;margin-top:8px;
-  display:flex;justify-content:space-between;align-items:center;gap:10px}
-.consent{display:flex;gap:11px;align-items:flex-start;margin:22px 0 0;font-size:14px;color:var(--muted)}
+.consent{display:flex;gap:11px;align-items:flex-start;margin:24px 0 0;
+  font-size:13.5px;line-height:1.55;color:var(--muted);cursor:pointer}
+.consent span{color:var(--muted)}
 .consent input{width:19px;height:19px;flex:0 0 auto;margin-top:2px;accent-color:var(--maroon)}
 
 /* ---------- done ---------- */
@@ -289,14 +295,16 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
   margin-bottom:4px}
 .f-sub{font-size:13px;color:var(--muted);margin-bottom:14px}
 .contact{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-.contact a{flex:1 1 104px;max-width:150px;display:flex;flex-direction:column;
+.contact a,.contact .copybtn{flex:1 1 104px;max-width:150px;display:flex;flex-direction:column;
   align-items:center;gap:7px;text-decoration:none;color:var(--ink);
   padding:14px 8px;border-radius:10px;transition:background .15s}
-.contact a:hover{background:#FFF7EC}
+.contact .copybtn{border:none;background:none;font-family:inherit;cursor:pointer}
+.contact a:hover,.contact .copybtn:hover{background:#FFF7EC}
+.contact .copied em{color:var(--maroon)}
 .orb{width:46px;height:46px;border-radius:50%;background:var(--maroon);
   color:#fff;display:flex;align-items:center;justify-content:center;
   box-shadow:0 4px 12px rgba(165,21,47,.25)}
-.contact a:first-child .orb{background:#1FA855;box-shadow:0 4px 12px rgba(31,168,85,.25)}
+.contact a .orb{background:#1FA855;box-shadow:0 4px 12px rgba(31,168,85,.25)}
 .contact b{font-weight:500;font-size:13.5px}
 .contact em{font-style:normal;font-size:11.5px;color:var(--muted);
   word-break:break-word;line-height:1.35}
@@ -378,6 +386,7 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
 
         <label data-t="fRelation"></label>
         <select id="relation"></select>
+        <input id="relationOther" class="other hidden">
         <div class="err" id="e_relation" data-t="reqErr"></div>
 
         <button class="btn btn-primary wide" data-go="p2"><span data-t="next"></span><i class="arw">&#8594;</i></button>
@@ -394,8 +403,8 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
     <!-- STEP 2 -->
     <section class="pane hidden" id="p2">
       <div class="wrap">
-        <button class="backlink" data-go="p1"><span>&#8592;</span><span data-t="back"></span></button>
         <div class="steps" data-step="2"></div>
+        <button class="backlink" data-go="p1"><span>&#8592;</span><span data-t="back"></span></button>
         <div class="kicker" data-t="k2"></div>
         <h2 data-t="t2"></h2>
         <p class="sub" data-t="s2"></p>
@@ -424,6 +433,7 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
           <div>
             <label data-t="fCommunity"></label>
             <select id="community"></select>
+            <input id="communityOther" class="other hidden">
           </div>
         </div>
 
@@ -447,8 +457,8 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
     <!-- STEP 3 -->
     <section class="pane hidden" id="p3">
       <div class="wrap">
-        <button class="backlink" data-go="p2"><span>&#8592;</span><span data-t="back"></span></button>
         <div class="steps" data-step="3"></div>
+        <button class="backlink" data-go="p2"><span>&#8592;</span><span data-t="back"></span></button>
         <div class="kicker" data-t="k3"></div>
         <h2 data-t="t3"></h2>
         <p class="sub" data-t="s3"></p>
@@ -465,8 +475,8 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
     <!-- STEP 4 : REVIEW -->
     <section class="pane hidden" id="p4">
       <div class="wrap">
-        <button class="backlink" data-go="p2"><span>&#8592;</span><span data-t="back"></span></button>
         <div class="steps" data-step="4"></div>
+        <button class="backlink" data-go="p2"><span>&#8592;</span><span data-t="back"></span></button>
         <div class="kicker" data-t="k4"></div>
         <h2 data-t="t4"></h2>
         <p class="sub" data-t="s4"></p>
@@ -492,8 +502,6 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
 
         <div class="paybox" id="paybox">
           <div style="font-size:14px" data-t="payNote"></div>
-          <div class="upi"><span id="upiId">yourname@okhdfcbank</span>
-            <button class="chip" id="copyUpi" data-t="copy"></button></div>
         </div>
 
         <label class="consent">
@@ -547,7 +555,7 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
         <b data-t="waLabel"></b>
         <em>+91 91061 41806</em>
       </a>
-      <a href="mailto:adinathmatrimony123@gmail.com">
+      <button type="button" class="copybtn" data-copy="adinathmatrimony123@gmail.com">
         <span class="orb">
           <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
                stroke-width="1.6" aria-hidden="true">
@@ -556,8 +564,8 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
         </span>
         <b data-t="mailLabel"></b>
         <em>adinathmatrimony123@gmail.com</em>
-      </a>
-      <a href="tel:+919106141806">
+      </button>
+      <button type="button" class="copybtn" data-copy="+919106141806">
         <span class="orb">
           <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
                stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
@@ -566,7 +574,7 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
         </span>
         <b data-t="callLabel"></b>
         <em>+91 91061 41806</em>
-      </a>
+      </button>
     </div>
   </footer>
   </div>
@@ -576,7 +584,6 @@ footer{text-align:center;padding:34px 16px calc(40px + env(safe-area-inset-botto
 <script>
 /* ============ CONFIG — edit these three lines only ============ */
 var BRAND_WA   = "919106141806";                 // your WhatsApp number, country code, no +
-var UPI_ID     = "yourname@okhdfcbank";          // your UPI id
 var MAX_MB     = 10;                             // largest upload allowed
 var API_URL    = "https://script.google.com/macros/s/AKfycbwG1Li3revS2DTjy7H9lhILADil5rbxYDlb5lwGZU0Ab2FeoQGCoDE4BbDt4pQHcDsX/exec";
 /* ============================================================== */
@@ -606,7 +613,7 @@ var T = {
   plans:[{n:"1 month",p:"Free",d:"Full profile sharing for 30 days.",tag:"Start here"},
          {n:"3 months",p:"₹100",d:"Priority matching and follow-up for 90 days."},
          {n:"Lifetime",p:"₹1100",d:"One payment. We keep looking until it is settled."}],
-  payNote:"Pay using this UPI id, then send the message. Add the payment screenshot on WhatsApp.",
+  payNote:"We will share the payment details with you on WhatsApp after you send this.",
   copy:"Copy",
   consent:"The information above is true to my knowledge, and I allow it to be shared for matchmaking purposes.",
   consentErr:"Please accept to continue.",
@@ -623,7 +630,7 @@ var T = {
   safeT:"Your information is safe with us.",
   safeS:"We never share your details publicly.",
   phYourName:"Enter your full name", phPerson:"Name as in the biodata",
-  phCity:"City or town", phReq:"Write in your own words",
+  phCity:"City or town", phReq:"Write in your own words", phOther:"Please type it here",
   contactT:"Get in touch", contactS:"We are here to help you on your journey.", waLabel:"WhatsApp", mailLabel:"Email", callLabel:"Call",
   waHello:"Hello, I have a question about Adinath Matrimony.",
   openWa:"Open WhatsApp", openWaAlt:"Use WhatsApp Web", copyMsg:"Copy message", copied:"Copied",
@@ -655,7 +662,7 @@ var T = {
   plans:[{n:"1 महीना",p:"नि:शुल्क",d:"30 दिन तक पूरी प्रोफ़ाइल साझा।",tag:"यहाँ से शुरू करें"},
          {n:"3 महीने",p:"₹100",d:"90 दिन प्राथमिकता से मिलान और फ़ॉलो-अप।"},
          {n:"आजीवन",p:"₹1100",d:"एक बार भुगतान। रिश्ता तय होने तक हम प्रयास करते रहेंगे।"}],
-  payNote:"इस UPI id पर भुगतान करें, फिर संदेश भेजें। स्क्रीनशॉट WhatsApp पर भेजें।",
+  payNote:"संदेश भेजने के बाद हम आपको WhatsApp पर भुगतान की जानकारी भेज देंगे।",
   copy:"कॉपी",
   consent:"ऊपर दी गई जानकारी मेरी जानकारी में सही है, और मैं इसे विवाह हेतु साझा करने की अनुमति देता/देती हूँ।",
   consentErr:"आगे बढ़ने के लिए स्वीकार करें।",
@@ -672,7 +679,7 @@ var T = {
   safeT:"आपकी जानकारी सुरक्षित है।",
   safeS:"हम आपकी जानकारी सार्वजनिक नहीं करते।",
   phYourName:"अपना पूरा नाम लिखें", phPerson:"बायोडाटा में लिखा नाम",
-  phCity:"शहर या गाँव", phReq:"अपने शब्दों में लिखें",
+  phCity:"शहर या गाँव", phReq:"अपने शब्दों में लिखें", phOther:"यहाँ लिखें",
   contactT:"संपर्क करें", contactS:"हम आपकी यात्रा में आपके साथ हैं।", waLabel:"WhatsApp", mailLabel:"ईमेल", callLabel:"कॉल करें",
   waHello:"नमस्ते, मुझे आदिनाथ मैट्रिमोनी के बारे में जानकारी चाहिए।",
   openWa:"WhatsApp खोलें", openWaAlt:"WhatsApp Web खोलें", copyMsg:"संदेश कॉपी करें", copied:"कॉपी हो गया",
@@ -704,7 +711,7 @@ var T = {
   plans:[{n:"1 મહિનો",p:"મફત",d:"30 દિવસ સુધી પૂરી પ્રોફાઇલ શેર.",tag:"અહીંથી શરૂ કરો"},
          {n:"3 મહિના",p:"₹100",d:"90 દિવસ પ્રાથમિકતાથી મેળ અને ફોલો-અપ."},
          {n:"આજીવન",p:"₹1100",d:"એક વાર ચુકવણી. સંબંધ નક્કી થાય ત્યાં સુધી અમે પ્રયત્ન કરીશું."}],
-  payNote:"આ UPI id પર ચુકવણી કરો, પછી સંદેશ મોકલો. સ્ક્રીનશોટ WhatsApp પર મોકલો.",
+  payNote:"સંદેશ મોકલ્યા પછી અમે તમને WhatsApp પર ચુકવણીની વિગતો મોકલીશું.",
   copy:"કૉપિ",
   consent:"ઉપરની માહિતી મારી જાણ મુજબ સાચી છે, અને હું તેને લગ્ન હેતુ શેર કરવાની પરવાનગી આપું છું.",
   consentErr:"આગળ વધવા સ્વીકારો.",
@@ -721,7 +728,7 @@ var T = {
   safeT:"તમારી માહિતી સુરક્ષિત છે.",
   safeS:"અમે તમારી માહિતી જાહેર કરતા નથી.",
   phYourName:"તમારું પૂરું નામ લખો", phPerson:"બાયોડેટામાં લખેલું નામ",
-  phCity:"શહેર કે ગામ", phReq:"તમારા શબ્દોમાં લખો",
+  phCity:"શહેર કે ગામ", phReq:"તમારા શબ્દોમાં લખો", phOther:"અહીં લખો",
   contactT:"સંપર્ક કરો", contactS:"અમે તમારી યાત્રામાં સાથે છીએ.", waLabel:"WhatsApp", mailLabel:"ઈમેલ", callLabel:"કૉલ કરો",
   waHello:"નમસ્તે, મારે આદિનાથ મેટ્રિમોની વિશે માહિતી જોઈએ છે.",
   openWa:"WhatsApp ખોલો", openWaAlt:"WhatsApp Web ખોલો", copyMsg:"સંદેશ કૉપિ કરો", copied:"કૉપિ થયું",
@@ -732,11 +739,22 @@ var T = {
 };
 
 var L="en", planIdx=0, fileObj=null, fileB64="", fileUrl="", lastMsg="";
-var FIELDS=["yourName","wa","relation","person","gender","birth","city","community","req"];
+var FIELDS=["yourName","wa","relation","relationOther","person","gender","birth","city","community","communityOther","req"];
 function saveDraft(){
   try{
     var o={lang:L,plan:planIdx};
-    FIELDS.forEach(function(id){ o[id]=$(id).value; });
+    function isOther(sel){ return sel.selectedIndex === sel.options.length-1 && sel.selectedIndex>0; }
+function syncOther(selId,inpId){
+  var sel=$(selId), inp=$(inpId);
+  var show=isOther(sel);
+  inp.classList.toggle("hidden",!show);
+  if(!show) inp.value="";
+}
+["relation","community"].forEach(function(id){
+  $(id).addEventListener("change",function(){ syncOther(id,id+"Other"); saveDraft(); });
+});
+
+FIELDS.forEach(function(id){ o[id]=$(id).value; });
     localStorage.setItem("adinath_draft", JSON.stringify(o));
   }catch(e){}
 }
@@ -744,7 +762,18 @@ function loadDraft(){
   try{
     var o=JSON.parse(localStorage.getItem("adinath_draft")||"null");
     if(!o) return;
-    FIELDS.forEach(function(id){ if(o[id]) $(id).value=o[id]; });
+    function isOther(sel){ return sel.selectedIndex === sel.options.length-1 && sel.selectedIndex>0; }
+function syncOther(selId,inpId){
+  var sel=$(selId), inp=$(inpId);
+  var show=isOther(sel);
+  inp.classList.toggle("hidden",!show);
+  if(!show) inp.value="";
+}
+["relation","community"].forEach(function(id){
+  $(id).addEventListener("change",function(){ syncOther(id,id+"Other"); saveDraft(); });
+});
+
+FIELDS.forEach(function(id){ if(o[id]) $(id).value=o[id]; });
     if(typeof o.plan==="number") planIdx=o.plan;
     if(o.lang) return o.lang;
   }catch(e){}
@@ -819,11 +848,13 @@ function apply(lang){
   $("person").placeholder=d.phPerson;
   $("city").placeholder=d.phCity;
   $("req").placeholder=d.phReq;
+  $("relationOther").placeholder=d.phOther;
+  $("communityOther").placeholder=d.phOther;
+  syncOther("relation","relationOther"); syncOther("community","communityOther");
   $("trust").innerHTML=d.trust.map(function(t){
     return '<div><span>'+t[0]+'</span>'+t[1].replace("\n","<br>")+'</div>';
   }).join("");
   $("paybox").classList.toggle("show", planIdx>0);
-  $("upiId").textContent=UPI_ID;
   var hi="https://api.whatsapp.com/send/?phone="+BRAND_WA+"&text="+
           encodeURIComponent(d.waHello)+"&type=phone_number&app_absent=0";
   $("cWa").href=hi;
@@ -850,7 +881,9 @@ $("poster").onerror=function(){ this.onerror=null; this.src=POSTER_DATA; };
 function show(id){
   ["p1","p2","p3","p4","p5","p6"].forEach(function(p){ $(p).classList.toggle("hidden",p!==id); });
   if(id==="p4") buildReview();
-  window.scrollTo({top:$("start").offsetTop-10,behavior:"smooth"});
+  var bar=document.querySelector(".langswitch");
+  var off=(bar?bar.offsetHeight:0)+8;
+  window.scrollTo({top:Math.max(0,$("start").offsetTop-off),behavior:"smooth"});
 }
 function bad(id,cond){ $("e_"+id).classList.toggle("show",cond); return cond; }
 function validate(step){
@@ -867,6 +900,17 @@ function validate(step){
   }
   return !f;
 }
+function isOther(sel){ return sel.selectedIndex === sel.options.length-1 && sel.selectedIndex>0; }
+function syncOther(selId,inpId){
+  var sel=$(selId), inp=$(inpId);
+  var show=isOther(sel);
+  inp.classList.toggle("hidden",!show);
+  if(!show) inp.value="";
+}
+["relation","community"].forEach(function(id){
+  $(id).addEventListener("change",function(){ syncOther(id,id+"Other"); saveDraft(); });
+});
+
 FIELDS.forEach(function(id){
   var el=$(id); if(el) el.addEventListener("change",saveDraft);
 });
@@ -909,13 +953,18 @@ $("fileClear").onclick=function(){
 };
 
 /* review + preview */
+function pick(id){
+  var sel=$(id), extra=$(id+"Other");
+  if(isOther(sel) && extra.value.trim()) return extra.value.trim();
+  return sel.value;
+}
 function data(){
   var d=T[L];
   return {
     yourName:$("yourName").value.trim(), wa:$("wa").value.replace(/\D/g,""),
-    relation:$("relation").value, person:$("person").value.trim(),
+    relation:pick("relation"), person:$("person").value.trim(),
     gender:$("gender").value, birth:$("birth").value, city:$("city").value.trim(),
-    community:$("community").value, req:$("req").value.trim(), plan:d.plans[planIdx].n+" — "+d.plans[planIdx].p,
+    community:pick("community"), req:$("req").value.trim(), plan:d.plans[planIdx].n+" — "+d.plans[planIdx].p,
     file:fileObj?fileObj.name:""
   };
 }
@@ -941,13 +990,6 @@ function buildReview(){
   } else vw.classList.add("hidden");
 }
 function esc(s){return String(s).replace(/[<>&]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;"}[c]})}
-
-/* copy upi */
-$("copyUpi").onclick=function(){
-  navigator.clipboard&&navigator.clipboard.writeText(UPI_ID);
-  this.textContent="✓";
-  var self=this; setTimeout(function(){ self.textContent=T[L].copy; },1500);
-};
 
 /* submit */
 $("send").onclick=function(){
@@ -988,6 +1030,24 @@ $("send").onclick=function(){
     }catch(e){ finish(); }
   });
 };
+
+document.querySelectorAll(".copybtn").forEach(function(b){
+  b.onclick=function(){
+    var val=b.getAttribute("data-copy"), em=b.querySelector("em"), was=em.textContent;
+    function ok(){ em.textContent=T[L].copied; b.classList.add("copied");
+      setTimeout(function(){ em.textContent=was; b.classList.remove("copied"); },1600); }
+    if(navigator.clipboard&&window.isSecureContext){
+      navigator.clipboard.writeText(val).then(ok,fb);
+    } else fb();
+    function fb(){
+      var ta=document.createElement("textarea");
+      ta.value=val; ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy"); ok(); }catch(e){}
+      document.body.removeChild(ta);
+    }
+  };
+});
 
 $("copyMsg").onclick=function(){
   var self=this;
