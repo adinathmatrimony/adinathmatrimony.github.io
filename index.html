@@ -376,7 +376,7 @@ footer{text-align:center;padding:30px 20px calc(36px + env(safe-area-inset-botto
 /* ============ CONFIG — edit these three lines only ============ */
 var BRAND_WA   = "919106141806";                 // your WhatsApp number, country code, no +
 var UPI_ID     = "yourname@okhdfcbank";          // your UPI id
-var API_URL    = "";                             // Apps Script /exec URL (leave "" to skip upload)
+var API_URL    = "https://script.google.com/macros/s/AKfycbwG1Li3revS2DTjy7H9lhILADil5rbxYDlb5lwGZU0Ab2FeoQGCoDE4BbDt4pQHcDsX/exec";
 /* ============================================================== */
 
 var T = {
@@ -491,6 +491,13 @@ var T = {
 };
 
 var L="en", planIdx=0, fileObj=null, fileB64="", fileUrl="", lastMsg="";
+function makeRef(name){
+  var n=new Date(), p=function(x){return ("0"+x).slice(-2)};
+  var ymd=String(n.getFullYear()).slice(2)+p(n.getMonth()+1)+p(n.getDate());
+  var slug=(name||"").toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,12);
+  if(!slug) slug="BIODATA";
+  return "ADN-"+ymd+"-"+slug+"-"+p(n.getHours())+p(n.getMinutes());
+}
 function waUrl(){
   return "https://api.whatsapp.com/send/?phone="+BRAND_WA+
          "&text="+encodeURIComponent(lastMsg)+"&type=phone_number&app_absent=0";
@@ -643,7 +650,7 @@ $("send").onclick=function(){
   if(!$("consent").checked){ $("e_consent").classList.add("show"); return; }
   $("e_consent").classList.remove("show");
   var d=T[L], v=data();
-  var ref="BD-"+Date.now().toString().slice(-6);
+  var ref=makeRef(v.person);
 
   if(API_URL){
     try{
