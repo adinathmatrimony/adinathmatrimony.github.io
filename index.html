@@ -264,7 +264,7 @@ footer{text-align:center;padding:30px 20px calc(36px + env(safe-area-inset-botto
           <b data-t="dropTitle"></b>
           <div class="hint" data-t="dropHint"></div>
         </div>
-        <input type="file" id="file" accept="image/*,application/pdf,.pdf,.heic,.heif" class="hidden">
+        <input type="file" id="file" accept="image/*,application/pdf,.pdf,.heic,.heif,.doc,.docx,.odt,.rtf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="hidden">
         <div class="filebar" id="filebar">
           <span class="nm" id="fileName"></span>
           <button type="button" id="fileClear" data-t="remove"></button>
@@ -393,7 +393,7 @@ var T = {
   fPerson:"Name of the person *", fGender:"Gender *", gen:["Select","Female","Male"],
   fBirth:"Birth year", fCity:"City",
   fFile:"Upload the biodata *", dropTitle:"Tap to choose a file",
-  dropHint:"PDF, JPG or PNG · up to 10 MB", remove:"Remove",
+  dropHint:"PDF, Word or photo · up to 10 MB", remove:"Remove",
   k3:"Step 3 of 4", t3:"What are you looking for?", s3:"Write freely — any language is fine.",
   fReq:"Your requirements", hReq:"Example: salary above 5 lakh, never married, Ahmedabad or Baroda, vegetarian.",
   chips:["Salary above ₹5 lakh","Never married","Same city","Vegetarian","Government job","Higher education"],
@@ -406,10 +406,11 @@ var T = {
   copy:"Copy",
   consent:"The information above is true to my knowledge, and I allow it to be shared for matchmaking purposes.",
   consentErr:"Please accept to continue.",
-  sendWa:"Send on WhatsApp", waHint:"WhatsApp will open with your summary ready. Attach the biodata file there too.",
+  sending:"Saving your biodata…", sendWa:"Send on WhatsApp", waHint:"WhatsApp will open with your summary ready. Attach the biodata file there too.",
   next:"Continue", back:"Back", review:"Review", edit:"Edit", looksGood:"Looks correct",
   reqErr:"This field is required.", waErr:"Enter a valid 10-digit number.",
   fileErr:"Please upload the biodata file.",
+  noPreview:"Attached. This file type cannot be previewed here.",
   sizeErr:"This file is {n} MB. Please upload a file below 10 MB.",
   sizeTip:"Tip: open the photo, crop it, or send a PDF instead.",
   doneT:"Thank you for trusting us", doneS:"We have received your details and will reply shortly on WhatsApp.",
@@ -431,7 +432,7 @@ var T = {
   fPerson:"व्यक्ति का नाम (Name) *", fGender:"लिंग *", gen:["चुनें","स्त्री","पुरुष"],
   fBirth:"जन्म वर्ष", fCity:"शहर",
   fFile:"बायोडाटा अपलोड करें *", dropTitle:"फ़ाइल चुनने के लिए दबाएँ",
-  dropHint:"PDF, JPG या PNG · 10 MB तक", remove:"हटाएँ",
+  dropHint:"PDF, Word या फ़ोटो · 10 MB तक", remove:"हटाएँ",
   k3:"चरण 3 / 4", t3:"आपकी अपेक्षा क्या है?", s3:"किसी भी भाषा में लिख सकते हैं।",
   fReq:"आपकी आवश्यकताएँ", hReq:"जैसे: सैलरी 5 लाख से ऊपर, अविवाहित, अहमदाबाद या बड़ौदा, शाकाहारी।",
   chips:["सैलरी ₹5 लाख से ऊपर","अविवाहित","एक ही शहर","शाकाहारी","सरकारी नौकरी","उच्च शिक्षा"],
@@ -444,10 +445,11 @@ var T = {
   copy:"कॉपी",
   consent:"ऊपर दी गई जानकारी मेरी जानकारी में सही है, और मैं इसे विवाह हेतु साझा करने की अनुमति देता/देती हूँ।",
   consentErr:"आगे बढ़ने के लिए स्वीकार करें।",
-  sendWa:"WhatsApp पर भेजें", waHint:"WhatsApp खुलेगा, सारांश तैयार रहेगा। बायोडाटा फ़ाइल भी वहीं भेजें।",
+  sending:"आपका बायोडाटा सहेजा जा रहा है…", sendWa:"WhatsApp पर भेजें", waHint:"WhatsApp खुलेगा, सारांश तैयार रहेगा। बायोडाटा फ़ाइल भी वहीं भेजें।",
   next:"आगे", back:"पीछे", review:"समीक्षा", edit:"बदलें", looksGood:"सही है",
   reqErr:"यह जानकारी आवश्यक है।", waErr:"मान्य 10 अंकों का नंबर दर्ज करें।",
   fileErr:"कृपया बायोडाटा फ़ाइल अपलोड करें।",
+  noPreview:"संलग्न है। इस प्रकार की फ़ाइल यहाँ दिखाई नहीं जा सकती।",
   sizeErr:"यह फ़ाइल {n} MB की है। कृपया 10 MB से कम की फ़ाइल अपलोड करें।",
   sizeTip:"सुझाव: फ़ोटो को क्रॉप करें, या PDF भेजें।",
   doneT:"हम पर विश्वास रखने के लिए धन्यवाद", doneS:"आपकी जानकारी मिल गई है। हम शीघ्र ही WhatsApp पर उत्तर देंगे।",
@@ -469,7 +471,7 @@ var T = {
   fPerson:"વ્યક્તિનું નામ (Name) *", fGender:"લિંગ *", gen:["પસંદ કરો","સ્ત્રી","પુરુષ"],
   fBirth:"જન્મ વર્ષ", fCity:"શહેર",
   fFile:"બાયોડેટા અપલોડ કરો *", dropTitle:"ફાઈલ પસંદ કરવા ક્લિક કરો",
-  dropHint:"PDF, JPG કે PNG · 10 MB સુધી", remove:"દૂર કરો",
+  dropHint:"PDF, Word કે ફોટો · 10 MB સુધી", remove:"દૂર કરો",
   k3:"પગલું 3 / 4", t3:"તમારી અપેક્ષા શું છે?", s3:"કોઈ પણ ભાષામાં લખી શકો છો.",
   fReq:"તમારી જરૂરિયાત", hReq:"જેમ કે: પગાર 5 લાખથી વધુ, અવિવાહિત, અમદાવાદ કે વડોદરા, શાકાહારી.",
   chips:["પગાર ₹5 લાખથી વધુ","અવિવાહિત","એક જ શહેર","શાકાહારી","સરકારી નોકરી","ઉચ્ચ શિક્ષણ"],
@@ -482,10 +484,11 @@ var T = {
   copy:"કૉપિ",
   consent:"ઉપરની માહિતી મારી જાણ મુજબ સાચી છે, અને હું તેને લગ્ન હેતુ શેર કરવાની પરવાનગી આપું છું.",
   consentErr:"આગળ વધવા સ્વીકારો.",
-  sendWa:"WhatsApp પર મોકલો", waHint:"WhatsApp ખુલશે, સારાંશ તૈયાર હશે. બાયોડેટા ફાઈલ પણ ત્યાં મોકલો.",
+  sending:"તમારો બાયોડેટા સાચવી રહ્યા છીએ…", sendWa:"WhatsApp પર મોકલો", waHint:"WhatsApp ખુલશે, સારાંશ તૈયાર હશે. બાયોડેટા ફાઈલ પણ ત્યાં મોકલો.",
   next:"આગળ", back:"પાછળ", review:"સમીક્ષા", edit:"સુધારો", looksGood:"બરાબર છે",
   reqErr:"આ માહિતી જરૂરી છે.", waErr:"માન્ય 10 અંકનો નંબર દાખલ કરો.",
   fileErr:"કૃપા કરી બાયોડેટા ફાઈલ અપલોડ કરો.",
+  noPreview:"જોડાયેલ છે. આ પ્રકારની ફાઈલ અહીં બતાવી શકાતી નથી.",
   sizeErr:"આ ફાઈલ {n} MB ની છે. કૃપા કરી 10 MB થી ઓછી ફાઈલ અપલોડ કરો.",
   sizeTip:"સૂચન: ફોટો ક્રોપ કરો, અથવા PDF મોકલો.",
   doneT:"અમારા પર વિશ્વાસ રાખવા બદલ આભાર", doneS:"તમારી માહિતી મળી ગઈ છે. અમે ટૂંક સમયમાં WhatsApp પર જવાબ આપીશું.",
@@ -653,9 +656,14 @@ function buildReview(){
   var vw=$("viewer");
   if(fileObj){
     vw.classList.remove("hidden");
-    vw.innerHTML = /pdf$/i.test(fileObj.type)||/\.pdf$/i.test(fileObj.name)
-      ? '<iframe src="'+fileUrl+'#toolbar=0" title="Biodata preview"></iframe>'
-      : '<img src="'+fileUrl+'" alt="Biodata preview">';
+    var isPdf=/pdf/i.test(fileObj.type)||/\.pdf$/i.test(fileObj.name);
+    var isImg=/^image\//i.test(fileObj.type);
+    vw.innerHTML = isPdf ? '<iframe src="'+fileUrl+'#toolbar=0" title="Biodata preview"></iframe>'
+      : isImg ? '<img src="'+fileUrl+'" alt="Biodata preview">'
+      : '<div style="padding:34px 18px;text-align:center">'+
+        '<div style="font-size:30px;color:var(--maroon)">&#128196;</div>'+
+        '<div style="margin-top:8px;font-size:15px">'+esc(fileObj.name)+'</div>'+
+        '<div class="hint">'+T[L].noPreview+'</div></div>';
   } else vw.classList.add("hidden");
 }
 function esc(s){return String(s).replace(/[<>&]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;"}[c]})}
@@ -674,16 +682,6 @@ $("send").onclick=function(){
   var d=T[L], v=data();
   var ref=makeRef(v.person);
 
-  if(API_URL){
-    withFile(function(b64){
-      try{
-        fetch(API_URL,{method:"POST",mode:"no-cors",
-          headers:{"Content-Type":"text/plain;charset=utf-8"},
-          body:JSON.stringify(Object.assign({},v,{ref:ref,lang:L,file:b64,fileName:v.file}))});
-      }catch(e){}
-    });
-  }
-
   var m="*"+d.mTitle+"*\n"+
     "\n"+d.mFor+": "+v.person+
     (v.gender?" ("+v.gender+(v.birth?", "+v.birth:"")+(v.city?", "+v.city:"")+")":"")+
@@ -695,8 +693,26 @@ $("send").onclick=function(){
 
   lastMsg=m;
   $("ref").textContent=d.mRef+": "+ref;
-  show("p6");
-  launchWhatsApp();
+
+  var btn=this, done=false, label=btn.textContent;
+  function finish(){
+    if(done) return; done=true;
+    btn.disabled=false; btn.textContent=label;
+    show("p6"); launchWhatsApp();
+  }
+
+  if(!API_URL) return finish();
+
+  btn.disabled=true; btn.textContent=d.sending;
+  setTimeout(finish,25000);                    // never leave them stuck
+  withFile(function(b64){
+    try{
+      fetch(API_URL,{method:"POST",mode:"no-cors",
+        headers:{"Content-Type":"text/plain;charset=utf-8"},
+        body:JSON.stringify(Object.assign({},v,{ref:ref,lang:L,file:b64,fileName:v.file}))
+      }).then(finish,finish);
+    }catch(e){ finish(); }
+  });
 };
 
 $("copyMsg").onclick=function(){
